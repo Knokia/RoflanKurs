@@ -56,7 +56,7 @@ namespace RoflanKurs
             // 
             // timerDown
             // 
-            this.timerDown.Interval = 10;
+            this.timerDown.Interval = 5;
             this.timerDown.Tick += new System.EventHandler(this.timerDown_Tick);
             // 
             // timer
@@ -69,7 +69,7 @@ namespace RoflanKurs
             // 
             this.MainSpaceShip.BackColor = System.Drawing.Color.Transparent;
             this.MainSpaceShip.Image = global::RoflanKurs.Properties.Resources.kosmolet;
-            this.MainSpaceShip.Location = new System.Drawing.Point(509, 338);
+            this.MainSpaceShip.Location = new System.Drawing.Point(486, 356);
             this.MainSpaceShip.Name = "MainSpaceShip";
             this.MainSpaceShip.Size = new System.Drawing.Size(167, 210);
             this.MainSpaceShip.TabIndex = 0;
@@ -80,9 +80,10 @@ namespace RoflanKurs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::RoflanKurs.Properties.Resources.BackGround__1_;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.MainSpaceShip);
+            this.ForeColor = System.Drawing.Color.Transparent;
             this.MaximumSize = new System.Drawing.Size(1280, 720);
             this.Name = "Form1";
             this.Text = "Form1";
