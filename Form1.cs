@@ -24,7 +24,18 @@ namespace RoflanKurs
         {
             SpaceShipSpeed = 10;
             Missile = new PictureBox[2];
-            SpeedOfMissile = 40;
+            SpeedOfMissile = 20;
+
+            for(int i = 0; i < Missile.Length; i++)
+            {
+                Missile[i] = new PictureBox();
+                Missile[i].BorderStyle = BorderStyle.None;
+                Missile[i].Size = new Size(5, 20);
+                Missile[i].BackColor = Color.Red;
+
+                this.Controls.Add(Missile[i]);
+
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -34,7 +45,7 @@ namespace RoflanKurs
 
         private void timerLeft_Tick(object sender, EventArgs e)
         {
-            if(MainSpaceShip.Left > 10)
+            if(MainSpaceShip.Left > 5)
             {
                 MainSpaceShip.Left -= SpaceShipSpeed;
             }
@@ -42,7 +53,7 @@ namespace RoflanKurs
 
         private void timerRight_Tick(object sender, EventArgs e)
         {
-            if (MainSpaceShip.Left < 1150)
+            if (MainSpaceShip.Left < 1100)
             {
                 MainSpaceShip.Left += SpaceShipSpeed;
             }
@@ -68,11 +79,19 @@ namespace RoflanKurs
             if(e.KeyCode == Keys.Left)
             {
                 timerLeft.Start();
+                for (int i = 0; i < Missile.Length; i++)
+                {
+                    Missile[i].Location = new Point(MainSpaceShip.Location.X + 10, MainSpaceShip.Location.Y + 100);
+                }
             }
 
             if (e.KeyCode == Keys.Right)
             {
                 timerRight.Start();
+                for (int i = 0; i < Missile.Length; i++)
+                {
+                    Missile[i].Location = new Point(MainSpaceShip.Location.X + 150, MainSpaceShip.Location.Y - 10);
+                }
             }
 
             if (e.KeyCode == Keys.Up)
@@ -94,6 +113,12 @@ namespace RoflanKurs
             timerDown.Stop();
         }
 
-        
+        private void TimerForMissile_Tick(object sender, EventArgs e)
+        {
+            for(int i = 0; i < Missile.Length; i++)
+            {
+                Missile[i].Top -= SpeedOfMissile;
+            }
+        }
     }
 }

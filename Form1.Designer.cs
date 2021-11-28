@@ -30,12 +30,14 @@ namespace RoflanKurs
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.timerLeft = new System.Windows.Forms.Timer(this.components);
             this.timerRight = new System.Windows.Forms.Timer(this.components);
             this.timerUp = new System.Windows.Forms.Timer(this.components);
             this.timerDown = new System.Windows.Forms.Timer(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.MainSpaceShip = new System.Windows.Forms.PictureBox();
+            this.TimerForMissile = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.MainSpaceShip)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,13 +70,19 @@ namespace RoflanKurs
             // MainSpaceShip
             // 
             this.MainSpaceShip.BackColor = System.Drawing.Color.Transparent;
-            this.MainSpaceShip.Image = global::RoflanKurs.Properties.Resources.kosmolet;
-            this.MainSpaceShip.Location = new System.Drawing.Point(486, 356);
+            this.MainSpaceShip.Image = ((System.Drawing.Image)(resources.GetObject("MainSpaceShip.Image")));
+            this.MainSpaceShip.Location = new System.Drawing.Point(481, 451);
             this.MainSpaceShip.Name = "MainSpaceShip";
-            this.MainSpaceShip.Size = new System.Drawing.Size(167, 210);
+            this.MainSpaceShip.Size = new System.Drawing.Size(166, 166);
             this.MainSpaceShip.TabIndex = 0;
             this.MainSpaceShip.TabStop = false;
             this.MainSpaceShip.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // TimerForMissile
+            // 
+            this.TimerForMissile.Enabled = true;
+            this.TimerForMissile.Interval = 10;
+            this.TimerForMissile.Tick += new System.EventHandler(this.TimerForMissile_Tick);
             // 
             // Form1
             // 
@@ -84,6 +92,7 @@ namespace RoflanKurs
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.MainSpaceShip);
             this.ForeColor = System.Drawing.Color.Transparent;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximumSize = new System.Drawing.Size(1280, 720);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -98,11 +107,12 @@ namespace RoflanKurs
         #endregion
 
         private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.PictureBox MainSpaceShip;
         private System.Windows.Forms.Timer timerLeft;
         private System.Windows.Forms.Timer timerRight;
         private System.Windows.Forms.Timer timerUp;
         private System.Windows.Forms.Timer timerDown;
+        private System.Windows.Forms.PictureBox MainSpaceShip;
+        private System.Windows.Forms.Timer TimerForMissile;
     }
 }
 
