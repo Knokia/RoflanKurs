@@ -17,6 +17,8 @@ namespace RoflanKurs
         PictureBox[] Missile;
         int SpeedOfMissile;
 
+        Random Random;
+
         PictureBox[] FeebleEnemy;
         int SizeOfFeeble;
         int SpeedOfFeeble;
@@ -30,12 +32,14 @@ namespace RoflanKurs
         {
             SpaceShipSpeed = 10;
 
+            Random = new Random();
+
             Missile = new PictureBox[2];
             SpeedOfMissile = 20;
 
             FeebleEnemy = new PictureBox[5];
-            SizeOfFeeble = 70;
-            SpeedOfFeeble = 7;
+            SizeOfFeeble = 80;
+            SpeedOfFeeble = 3;
             Image ImageOfFeeble = Image.FromFile("C:\\ship2.png");
 
             for(int i = 0; i < FeebleEnemy.Length; i++)
@@ -45,7 +49,7 @@ namespace RoflanKurs
                 FeebleEnemy[i].SizeMode = PictureBoxSizeMode.Zoom;
                 FeebleEnemy[i].BackColor = Color.Transparent;
                 FeebleEnemy[i].Image = ImageOfFeeble;
-                FeebleEnemy[i].Location = new Point(500, 100); //починить.
+                FeebleEnemy[i].Location = new Point((i + 1) * Random.Next(90, 160) + 1080, Random.Next(70, 130)); //починить.
 
                 this.Controls.Add(FeebleEnemy[i]);
             }
@@ -105,6 +109,7 @@ namespace RoflanKurs
                 timerLeft.Start();
                 for (int i = 0; i < Missile.Length; i++)
                 {
+                    PopalPoHuesosu();
                     Missile[i].Location = new Point(MainSpaceShip.Location.X + 10, MainSpaceShip.Location.Y + 100);
                 }
             }
@@ -114,6 +119,7 @@ namespace RoflanKurs
                 timerRight.Start();
                 for (int i = 0; i < Missile.Length; i++)
                 {
+                    PopalPoHuesosu();
                     Missile[i].Location = new Point(MainSpaceShip.Location.X + 150, MainSpaceShip.Location.Y - 10);
                 }
             }
@@ -157,8 +163,12 @@ namespace RoflanKurs
                 FeebleEnemy[i].Left -= SpeedOfFeeble + (int)(Math.Sin(FeebleEnemy[i].Left * Math.PI / 180) + 
                     (int)(Math.Cos(FeebleEnemy[i].Left * Math.PI / 180)));
 
+                PopalPoHuesosu();
+
                 if(FeebleEnemy[i].Left < this.Left)
                 {
+                    int SizeOfFeeble = Random.Next(70, 80);
+                    FeebleEnemy[i].Size = new Size(SizeOfFeeble, SizeOfFeeble);
                     FeebleEnemy[i].Location = new Point(500, 100); //починить.
                 }
             }
@@ -170,7 +180,13 @@ namespace RoflanKurs
             {
                 if (Missile[0].Bounds.IntersectsWith(FeebleEnemy[i].Bounds))
                 {
-                    FeebleEnemy[i].Location = new Point();
+                    FeebleEnemy[i].Location = new Point((i + 1) * Random.Next(90, 160) + 1280, Random.Next(90, 140));
+                    Missile[0].Location = new Point(2000, MainSpaceShip.Location.Y + 50);
+                }
+
+                if (MainSpaceShip.Bounds.IntersectsWith(FeebleEnemy[i].Bounds))
+                {
+                    MainSpaceShip.Visible = false;
                 }
             }
         }
