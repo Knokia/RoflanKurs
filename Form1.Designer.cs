@@ -38,6 +38,7 @@ namespace RoflanKurs
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.MainSpaceShip = new System.Windows.Forms.PictureBox();
             this.TimerForMissile = new System.Windows.Forms.Timer(this.components);
+            this.TimerForFeeble = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.MainSpaceShip)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,7 +72,7 @@ namespace RoflanKurs
             // 
             this.MainSpaceShip.BackColor = System.Drawing.Color.Transparent;
             this.MainSpaceShip.Image = ((System.Drawing.Image)(resources.GetObject("MainSpaceShip.Image")));
-            this.MainSpaceShip.Location = new System.Drawing.Point(481, 451);
+            this.MainSpaceShip.Location = new System.Drawing.Point(514, 443);
             this.MainSpaceShip.Name = "MainSpaceShip";
             this.MainSpaceShip.Size = new System.Drawing.Size(166, 166);
             this.MainSpaceShip.TabIndex = 0;
@@ -83,6 +84,12 @@ namespace RoflanKurs
             this.TimerForMissile.Enabled = true;
             this.TimerForMissile.Interval = 10;
             this.TimerForMissile.Tick += new System.EventHandler(this.TimerForMissile_Tick);
+            // 
+            // TimerForFeeble
+            // 
+            this.TimerForFeeble.Enabled = true;
+            this.TimerForFeeble.Interval = 10;
+            this.TimerForFeeble.Tick += new System.EventHandler(this.TimerForFeeble_Tick);
             // 
             // Form1
             // 
@@ -113,6 +120,7 @@ namespace RoflanKurs
         private System.Windows.Forms.Timer timerDown;
         private System.Windows.Forms.PictureBox MainSpaceShip;
         private System.Windows.Forms.Timer TimerForMissile;
+        private System.Windows.Forms.Timer TimerForFeeble;
     }
 }
 
