@@ -19,6 +19,8 @@ namespace RoflanKurs
 
         Random Random;
 
+        PictureBox[] Health;
+
         PictureBox[] FeebleEnemy;
         int SizeOfFeeble;
         int SpeedOfFeeble;
@@ -44,6 +46,11 @@ namespace RoflanKurs
 
             Missile = new PictureBox[2];
             SpeedOfMissile = 20;
+
+            Health = new PictureBox[3];
+            Image ImageOfHealth1 = Image.FromFile("C:\\ThreeHeart.png");
+            Image ImageOfHealth2 = Image.FromFile("C:\\TwoHeart.png");
+            Image ImageOfHealth3 = Image.FromFile("C:\\OneHeart.png");
 
             FeebleEnemy = new PictureBox[5];
             SizeOfFeeble = 80;
@@ -71,6 +78,21 @@ namespace RoflanKurs
 
                 this.Controls.Add(Missile[i]);
 
+            }
+
+            for(int i = 0; i < Health.Length; i++)
+            {
+                Health[i] = new PictureBox();
+                Health[i].SizeMode = PictureBoxSizeMode.Zoom;
+                Health[i].Image = ImageOfHealth1;
+              //  Health[i].Image = ImageOfHealth2;
+              //  Health[i].Image = ImageOfHealth3;
+                Health[i].Size = new Size(90, 40);
+                Health[i].BorderStyle = BorderStyle.None;
+                Health[i].BackColor = Color.Transparent;
+                Health[i].Location = new Point(10, 0);
+
+                this.Controls.Add(Health[i]);
             }
         }
 
@@ -168,8 +190,8 @@ namespace RoflanKurs
         {
             for(int i = 0; i < FeebleEnemy.Length; i++)
             {
-                FeebleEnemy[i].Left -= SpeedOfFeeble + (int)(Math.Sin(FeebleEnemy[i].Left * Math.PI / 180) + 
-                    (int)Math.Cos(FeebleEnemy[i].Left * Math.PI / 180));
+                FeebleEnemy[i].Left += SpeedOfFeeble + (int)(Math.Tan(FeebleEnemy[i].Left * Math.PI / 180) + 
+                    (int)Math.Tan(FeebleEnemy[i].Left * Math.PI / 180));
 
                 HitEnemy();
 
@@ -196,6 +218,7 @@ namespace RoflanKurs
 
                 if (MainSpaceShip.Bounds.IntersectsWith(FeebleEnemy[i].Bounds))
                 {
+                    
                     MainSpaceShip.Visible = false;
                 }
             }
