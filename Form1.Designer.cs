@@ -72,9 +72,10 @@ namespace RoflanKurs
             // 
             this.MainSpaceShip.BackColor = System.Drawing.Color.Transparent;
             this.MainSpaceShip.Image = ((System.Drawing.Image)(resources.GetObject("MainSpaceShip.Image")));
-            this.MainSpaceShip.Location = new System.Drawing.Point(514, 443);
+            this.MainSpaceShip.Location = new System.Drawing.Point(555, 452);
             this.MainSpaceShip.Name = "MainSpaceShip";
-            this.MainSpaceShip.Size = new System.Drawing.Size(166, 166);
+            this.MainSpaceShip.Size = new System.Drawing.Size(139, 147);
+            this.MainSpaceShip.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.MainSpaceShip.TabIndex = 0;
             this.MainSpaceShip.TabStop = false;
             this.MainSpaceShip.Click += new System.EventHandler(this.pictureBox1_Click);

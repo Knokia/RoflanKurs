@@ -23,9 +23,17 @@ namespace RoflanKurs
         int SizeOfFeeble;
         int SpeedOfFeeble;
 
+        private Label LabelOfScore;
+        int Score;
         public Form1()
         {
             InitializeComponent();
+            LabelOfScore = new Label();
+            LabelOfScore.Size = new Size(100, 60);
+            LabelOfScore.Location = new Point(1030, 30);
+            LabelOfScore.Font = new System.Drawing.Font("Showcard Gothic", 18); //починить
+            LabelOfScore.Text = "Score: 0";
+            this.Controls.Add(LabelOfScore);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -42,14 +50,14 @@ namespace RoflanKurs
             SpeedOfFeeble = 3;
             Image ImageOfFeeble = Image.FromFile("C:\\ship2.png");
 
-            for(int i = 0; i < FeebleEnemy.Length; i++)
+            for(int i = 0; i < FeebleEnemy.Length; i++) //Задаем параметры слабым ребятам
             {
                 FeebleEnemy[i] = new PictureBox();
                 FeebleEnemy[i].Size = new Size(SizeOfFeeble, SizeOfFeeble);
                 FeebleEnemy[i].SizeMode = PictureBoxSizeMode.Zoom;
                 FeebleEnemy[i].BackColor = Color.Transparent;
                 FeebleEnemy[i].Image = ImageOfFeeble;
-                FeebleEnemy[i].Location = new Point((i + 1) * Random.Next(90, 160) + 1080, Random.Next(70, 130)); //починить.
+                FeebleEnemy[i].Location = new Point((i + 1) * Random.Next(90, 160) + 1080, Random.Next(40, 150)); //починить.
 
                 this.Controls.Add(FeebleEnemy[i]);
             }
@@ -71,11 +79,11 @@ namespace RoflanKurs
 
         }
 
-        private void timerLeft_Tick(object sender, EventArgs e) //движение лев
+        private void timerLeft_Tick(object sender, EventArgs e) //КНОПАЧКА НАЖАТА ВЛЕВА
         {
             if(MainSpaceShip.Left > 5)
             {
-                MainSpaceShip.Left -= SpaceShipSpeed;
+                MainSpaceShip.Left -= SpaceShipSpeed; //КНОПАЧКА НАЖАТА ВПРАВА
             }
         }
 
@@ -87,12 +95,12 @@ namespace RoflanKurs
             }
         }
 
-        private void timerUp_Tick(object sender, EventArgs e)
+        private void timerUp_Tick(object sender, EventArgs e) //КНОПАЧКА НАЖАТА ВНИЗ
         {
             MainSpaceShip.Top -= SpaceShipSpeed;
         }
 
-        private void timerDown_Tick(object sender, EventArgs e)
+        private void timerDown_Tick(object sender, EventArgs e) //КНОПАЧКА НАЖАТА ВВЕРХ
         {
             MainSpaceShip.Top += SpaceShipSpeed;
         }
@@ -109,8 +117,8 @@ namespace RoflanKurs
                 timerLeft.Start();
                 for (int i = 0; i < Missile.Length; i++)
                 {
-                    PopalPoHuesosu();
-                    Missile[i].Location = new Point(MainSpaceShip.Location.X + 10, MainSpaceShip.Location.Y + 100);
+                    HitEnemy();
+                    Missile[i].Location = new Point(MainSpaceShip.Location.X + 10, MainSpaceShip.Location.Y + 100); // Для стрельбы из левого
                 }
             }
 
@@ -119,20 +127,20 @@ namespace RoflanKurs
                 timerRight.Start();
                 for (int i = 0; i < Missile.Length; i++)
                 {
-                    PopalPoHuesosu();
-                    Missile[i].Location = new Point(MainSpaceShip.Location.X + 150, MainSpaceShip.Location.Y - 10);
+                    HitEnemy();
+                    Missile[i].Location = new Point(MainSpaceShip.Location.X + 150, MainSpaceShip.Location.Y - 10); // Для стрельбы из правого
                 }
             }
 
-            if (e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.Up) //вверх
             {
                 timerUp.Start();
             }
 
-            if (e.KeyCode == Keys.Down)
+            if (e.KeyCode == Keys.Down) //вниз
             {
                 timerDown.Start();
-            }
+            } 
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -161,11 +169,11 @@ namespace RoflanKurs
             for(int i = 0; i < FeebleEnemy.Length; i++)
             {
                 FeebleEnemy[i].Left -= SpeedOfFeeble + (int)(Math.Sin(FeebleEnemy[i].Left * Math.PI / 180) + 
-                    (int)(Math.Cos(FeebleEnemy[i].Left * Math.PI / 180)));
+                    (int)Math.Cos(FeebleEnemy[i].Left * Math.PI / 180));
 
-                PopalPoHuesosu();
+                HitEnemy();
 
-                if(FeebleEnemy[i].Left < this.Left)
+                if(FeebleEnemy[i].Top < this.Top)
                 {
                     int SizeOfFeeble = Random.Next(70, 80);
                     FeebleEnemy[i].Size = new Size(SizeOfFeeble, SizeOfFeeble);
@@ -174,7 +182,7 @@ namespace RoflanKurs
             }
         }
 
-        private void PopalPoHuesosu()//поменять название и доделать
+        private void HitEnemy()//поменять название и доделать
         {
             for(int i = 0; i < FeebleEnemy.Length; i++)
             {
@@ -182,6 +190,8 @@ namespace RoflanKurs
                 {
                     FeebleEnemy[i].Location = new Point((i + 1) * Random.Next(90, 160) + 1280, Random.Next(90, 140));
                     Missile[0].Location = new Point(2000, MainSpaceShip.Location.Y + 50);
+
+                    LabelOfScore.Text = "Score: " + ++Score;
                 }
 
                 if (MainSpaceShip.Bounds.IntersectsWith(FeebleEnemy[i].Bounds))
@@ -189,6 +199,11 @@ namespace RoflanKurs
                     MainSpaceShip.Visible = false;
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
